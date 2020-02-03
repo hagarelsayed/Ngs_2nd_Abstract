@@ -1,0 +1,4 @@
+git remote add origin https://github.com/hagarelsayed/ngs.git
+git push -u origin master
+# Data download by sra-toolkit
+conda install sra-toolkit
