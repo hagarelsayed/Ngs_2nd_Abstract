@@ -1,4 +1,10 @@
 git remote add origin https://github.com/hagarelsayed/ngs.git
 git push -u origin master
+
+#previously unworking codes for installing the kit
+#conda install sra-tools
+#another code (working but to install the toolkit but was making trouble to the environment 
+#sudo apt insall sra-toolkit
+
 # Data download by sra-toolkit
-conda install sra-toolkit
+conda install -c bioconda sra-tools
