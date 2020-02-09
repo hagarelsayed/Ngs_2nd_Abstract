@@ -1,5 +1,5 @@
 ## Ngs_2nd_Abstract
-# Towards unravelling transcriptomic changes in human airway smooth muscles 
+# Towards Unravelling Transcriptomic Changes In Human Airway Smooth Muscles 
 
 ## Abstract (2): 
 
