@@ -411,6 +411,7 @@ Parametric dispersion fit failed. Try a local fit and/or a pooled estimation.
 
 The error may be due to values on the matrix is zero which was a reult of aligning to a small portion of the reference genome 
 Now will try to get back to the alignment step to index another genome
+Details in the following link [issue 6](https://github.com/hagarelsayed/Ngs_2nd_Abstract/issues/6)
 
 ## Quality checking for the fastq files after processing and calculating GC content
 
@@ -427,3 +428,5 @@ samtools bam2fq UNT_12.bam > UNT_12.fastq
 samtools bam2fq UNT_20.bam > UNT_20.fastq
  samtools bam2fq UNT_16.bam > UNT_16.fastq
 ```
+![image](https://user-images.githubusercontent.com/60422836/74192075-7a8dbc00-4c5d-11ea-9f38-0901d507e659.png)
+
