@@ -414,6 +414,12 @@ The error may be due to values on the matrix is zero which was a reult of aligni
 Now will try to get back to the alignment step to index another genome
 Details in the following link [issue 6](https://github.com/hagarelsayed/Ngs_2nd_Abstract/issues/6)
 
+The Result simple counts from the subset is 
+
+[simple_counts.txt](https://github.com/hagarelsayed/Ngs_2nd_Abstract/files/4183208/simple_counts.txt)
+
+Normalized deseq matrix from the subset is
+[norm-matrix-deseq1.txt](https://github.com/hagarelsayed/Ngs_2nd_Abstract/files/4183220/norm-matrix-deseq1.txt)
 ## Quality checking for the fastq files after processing and calculating GC content
 
 Details of Fastqc files at the following issue [](https://github.com/Saraelattar/fastqc/issues/1)
