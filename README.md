@@ -171,3 +171,321 @@ and  [issue 3](https://github.com/hagarelsayed/Ngs_2nd_Abstract/issues/3
 )
 It was solved in issue 5
 
+## Data Subsetting to an even smaller size
+
+Preparing Environment
+```
+conda activate ngs1
+conda install seqtk
+```
+Subset small number ; For test only;
+`for file in ./*.fastq.gz ; do     echo $file ;     seqtk sample -s100 $file 500 > ${file/.fastq.gz/.fastq}; done`
+
+## Alignment
+Choose ERCC to work on 
+```
+INDEX=chr22_with_ERCC92
+RUNLOG=runlog.txt
+READS_DIR=~/workdir/sample_data/renamed/
+mkdir bam
+
+
+for SAMPLE in UNT;
+do
+    for REPLICATE in 12 16 20;
+    do
+        R1=$READS_DIR/${SAMPLE}_Rep${REPLICATE}*pass_1.fastq
+        R2=$READS_DIR/${SAMPLE}_Rep${REPLICATE}*pass_2.fastq
+        BAM=bam/${SAMPLE}_${REPLICATE}.bam
+
+        hisat2 $INDEX -1 $R1 -2 $R2 | samtools sort > $BAM
+        samtools index $BAM
+    done
+done
+
+```
+### Results of the first set; 
+500 reads; of these:
+  500 (100.00%) were paired; of these:
+    478 (95.60%) aligned concordantly 0 times
+    22 (4.40%) aligned concordantly exactly 1 time
+    0 (0.00%) aligned concordantly >1 times
+    ----
+    478 pairs aligned concordantly 0 times; of these:
+      0 (0.00%) aligned discordantly 1 time
+    ----
+    478 pairs aligned 0 times concordantly or discordantly; of these:
+      956 mates make up the pairs; of these:
+        951 (99.48%) aligned 0 times
+        5 (0.52%) aligned exactly 1 time
+        0 (0.00%) aligned >1 times
+4.90% overall alignment rate
+
+500 reads; of these:
+  500 (100.00%) were paired; of these:
+    481 (96.20%) aligned concordantly 0 times
+    19 (3.80%) aligned concordantly exactly 1 time
+    0 (0.00%) aligned concordantly >1 times
+    ----
+    481 pairs aligned concordantly 0 times; of these:
+      0 (0.00%) aligned discordantly 1 time
+    ----
+    481 pairs aligned 0 times concordantly or discordantly; of these:
+      962 mates make up the pairs; of these:
+        957 (99.48%) aligned 0 times
+        5 (0.52%) aligned exactly 1 time
+        0 (0.00%) aligned >1 times
+4.30% overall alignment rate
+
+500 reads; of these:
+  500 (100.00%) were paired; of these:
+    487 (97.40%) aligned concordantly 0 times
+    13 (2.60%) aligned concordantly exactly 1 time
+    0 (0.00%) aligned concordantly >1 times
+    ----
+    487 pairs aligned concordantly 0 times; of these:
+      0 (0.00%) aligned discordantly 1 time
+    ----
+    487 pairs aligned 0 times concordantly or discordantly; of these:
+      974 mates make up the pairs; of these:
+        971 (99.69%) aligned 0 times
+        3 (0.31%) aligned exactly 1 time
+        0 (0.00%) aligned >1 times
+2.90% overall alignment rate
+
+![dd](https://user-images.githubusercontent.com/60422836/74152521-265fe900-4c17-11ea-9683-e6bfcb2aa090.png)
+
+Code for second set;
+
+```
+for SAMPLE in TTT;
+do
+    for REPLICATE in 13 17 21;
+    do
+        R1=$READS_DIR/${SAMPLE}_Rep${REPLICATE}*pass_1.fastq
+        R2=$READS_DIR/${SAMPLE}_Rep${REPLICATE}*pass_2.fastq
+        BAM=bam/${SAMPLE}_${REPLICATE}.bam
+
+        hisat2 $INDEX -1 $R1 -2 $R2 | samtools sort > $BAM
+        samtools index $BAM
+    done
+done
+```
+
+
+
+## Results of second set : 
+500 reads; of these:
+  500 (100.00%) were paired; of these:
+    487 (97.40%) aligned concordantly 0 times
+    12 (2.40%) aligned concordantly exactly 1 time
+    1 (0.20%) aligned concordantly >1 times
+    ----
+    487 pairs aligned concordantly 0 times; of these:
+      0 (0.00%) aligned discordantly 1 time
+    ----
+    487 pairs aligned 0 times concordantly or discordantly; of these:
+      974 mates make up the pairs; of these:
+        971 (99.69%) aligned 0 times
+        1 (0.10%) aligned exactly 1 time
+        2 (0.21%) aligned >1 times
+2.90% overall alignment rate
+500 reads; of these:
+  500 (100.00%) were paired; of these:
+    486 (97.20%) aligned concordantly 0 times
+    14 (2.80%) aligned concordantly exactly 1 time
+    0 (0.00%) aligned concordantly >1 times
+    ----
+    486 pairs aligned concordantly 0 times; of these:
+      0 (0.00%) aligned discordantly 1 time
+    ----
+    486 pairs aligned 0 times concordantly or discordantly; of these:
+      972 mates make up the pairs; of these:
+        967 (99.49%) aligned 0 times
+        5 (0.51%) aligned exactly 1 time
+        0 (0.00%) aligned >1 times
+3.30% overall alignment rate
+500 reads; of these:
+  500 (100.00%) were paired; of these:
+    485 (97.00%) aligned concordantly 0 times
+    14 (2.80%) aligned concordantly exactly 1 time
+    1 (0.20%) aligned concordantly >1 times
+    ----
+    485 pairs aligned concordantly 0 times; of these:
+      0 (0.00%) aligned discordantly 1 time
+    ----
+    485 pairs aligned 0 times concordantly or discordantly; of these:
+      970 mates make up the pairs; of these:
+        968 (99.79%) aligned 0 times
+        2 (0.21%) aligned exactly 1 time
+        0 (0.00%) aligned >1 times
+3.20% overall alignment rate
+
+## Quantification
+
+```
+GTF=~/workdir/diff_exp/ref/ERCC92.gtf 
+featureCounts -a $GTF -g gene_name -o counts.txt  bam/UNT*.bam  bam/TTT*.bam
+```
+
+The following error came up : 
+
+`Failed to open the annotation file /home/ngs/workdir/diff_exp/ref/ERCC92.gtf, or its format is incorrect, or it contains no 'exon' features
+`
+
+![crop](https://user-images.githubusercontent.com/60422836/74151840-b309a780-4c15-11ea-9e28-c5789f79fffb.png)
+
+The Reference genome changed to 
+`GTF=~/workdir/sample_data/gencode.v29.annotation.gtf
+`
+The feature count worked smoothly and this is the out put results 
+![22](https://user-images.githubusercontent.com/60422836/74152073-31fee000-4c16-11ea-928c-43f2d1997710.png)
+
+
+```
+cat counts.txt | cut -f 1,7-12 > simple_counts.txt 
+less simple_counts.txt
+```
+
+## Results of Quantification:
+
+The results could not be uploaded to git but found at this link 
+
+[Results of Quantification](https://drive.google.com/open?id=14K528G5B0N6N54OKRwXT5pZlUbBnYUWU
+)
+
+
+
+
+# Differential Expression 
+
+
+`cat counts.txt | cut -f 1,7-12 > simple_counts.txt`
+
+Simple counts produced 
+[simple_counts.txt](https://github.com/hagarelsayed/Ngs_2nd_Abstract/files/4181182/simple_counts.txt)
+
+All the schedule is Zero may be because of the low alignment rate for the small genome
+
+while trying to do the differential analysis by Deseq, 
+`cat simple_counts.txt | Rscript deseq1.r 3x3 > results_deseq1.tsv
+`
+The following error came up :
+Error in parametricDispersionFit(means, disps) :
+Parametric dispersion fit failed. Try a local fit and/or a pooled estimation.
+
+![Deseq Error](https://user-images.githubusercontent.com/60422836/74156848-d9ccdb80-4c1f-11ea-9147-c0582d770393.png)
+
+The error may be due to values on the matrix is zero which was a reult of aligning to a small portion of the reference genome 
+Now will try to get back to the alignment step to index another genome
+
+
+
+
+## Aligning to our original index (not a subset like in the past example) :
+There was a direction towards changing the reference to our original reference that gave high alignment rate with the dataset so that the feature count will result in a count matrix containing different versatile values for deseq to work on.
+
+```
+INDEX=gencode.v33.transcripts
+
+###Other variables are the same and defined previously 
+RUNLOG=runlog.txt
+READS_DIR=~/workdir/sample_data/renamed/
+mkdir bam
+ 
+for SAMPLE in UNT; do     for REPLICATE in 12 16 20;     do         R1=$READS
+_DIR/${SAMPLE}_Rep${REPLICATE}*pass_1.fastq;         R2=$READS_DIR/${SAMPLE}_Rep${REPLICATE}*pass_2.fastq;         BAM=bam/${SAMPLE}_${REPLICATE
+}.bam;          hisat2 $INDEX -1 $R1 -2 $R2 | samtools sort > $BAM;         samtools index $BAM;     done; done
+```
+Results of the Alignment score for the untreated condition
+500 reads; of these:
+  500 (100.00%) were paired; of these:
+    71 (14.20%) aligned concordantly 0 times
+    108 (21.60%) aligned concordantly exactly 1 time
+    321 (64.20%) aligned concordantly >1 times
+    ----
+    71 pairs aligned concordantly 0 times; of these:
+      4 (5.63%) aligned discordantly 1 time
+    ----
+    67 pairs aligned 0 times concordantly or discordantly; of these:
+      134 mates make up the pairs; of these:
+        112 (83.58%) aligned 0 times
+        9 (6.72%) aligned exactly 1 time
+        13 (9.70%) aligned >1 times
+88.80% overall alignment rate
+500 reads; of these:
+  500 (100.00%) were paired; of these:
+    75 (15.00%) aligned concordantly 0 times
+    121 (24.20%) aligned concordantly exactly 1 time
+    304 (60.80%) aligned concordantly >1 times
+    ----
+    75 pairs aligned concordantly 0 times; of these:
+      2 (2.67%) aligned discordantly 1 time
+    ----
+    73 pairs aligned 0 times concordantly or discordantly; of these:
+      146 mates make up the pairs; of these:
+        132 (90.41%) aligned 0 times
+        4 (2.74%) aligned exactly 1 time
+        10 (6.85%) aligned >1 times
+86.80% overall alignment rate
+500 reads; of these:
+  500 (100.00%) were paired; of these:
+    86 (17.20%) aligned concordantly 0 times
+    99 (19.80%) aligned concordantly exactly 1 time
+    315 (63.00%) aligned concordantly >1 times
+    ----
+    86 pairs aligned concordantly 0 times; of these:
+      1 (1.16%) aligned discordantly 1 time
+    ----
+    85 pairs aligned 0 times concordantly or discordantly; of these:
+      170 mates make up the pairs; of these:
+        147 (86.47%) aligned 0 times
+        8 (4.71%) aligned exactly 1 time
+        15 (8.82%) aligned >1 times
+85.30% overall alignment rate
+
+Same step for the other group
+```
+for SAMPLE in UNT; do     for REPLICATE in 12 16 20;     do         R1=$READS
+_DIR/${SAMPLE}_Rep${REPLICATE}*pass_1.fastq;         R2=$READS_DIR/${SAMPLE}_Rep${REPLICATE}*pass_2.fastq;         BAM=bam/${SAMPLE}_${REPLICATE
+}.bam;          hisat2 $INDEX -1 $R1 -2 $R2 | samtools sort > $BAM;         samtools index $BAM;     done; done
+```
+Alignment summary results :+1: 
+500 reads; of these:
+  500 (100.00%) were paired; of these:
+    87 (17.40%) aligned concordantly 0 times
+    111 (22.20%) aligned concordantly exactly 1 time
+    302 (60.40%) aligned concordantly >1 times
+    ----
+    87 pairs aligned concordantly 0 times; of these:
+      0 (0.00%) aligned discordantly 1 time
+    ----
+    87 pairs aligned 0 times concordantly or discordantly; of these:
+      174 mates make up the pairs; of these:
+        143 (82.18%) aligned 0 times
+        6 (3.45%) aligned exactly 1 time
+        25 (14.37%) aligned >1 times
+85.70% overall alignment rate
+
+![err2](https://user-images.githubusercontent.com/60422836/74164856-00ddda00-4c2d-11ea-97a0-8548c55c1d0c.png)
+
+
+## Quantification
+
+```
+GTF=~/workdir/hisat_align/hisatIndex/proj_index/gencode.v33.annotation.gtf
+featureCounts -a $GTF -g gene_name -o counts.txt  bam/UNT*.bam  bam/TTT*.bam
+```
+Result of Quantification 
+
+
+Differential Expression:
+
+`cat simple_counts.txt | Rscript deseq1.r 3x3 > results_deseq1.tsv
+`
+Another Error popped up ;
+![33](https://user-images.githubusercontent.com/60422836/74167861-924f4b00-4c31-11ea-99cd-0d34080e36ac.png)
+
+The table of the count is availabe at this link 
+
+https://github.com/hagarelsayed/Ngs_2nd_Abstract/issues/6
