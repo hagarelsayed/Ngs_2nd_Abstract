@@ -66,7 +66,7 @@ cat Homo_sapiens.GRCh38.dna.chromosome.11.fa |  grep -v ">" | perl -ne 'chomp $_
 
 ## Quality control of reads was performed vi FastQC tool
 
-Results: the quality for the 12 reads for the 6 runs can be obtained in details from this link https://github.com/Saraelattar/fastqc/issues/1 [](https://github.com/Saraelattar/fastqc/issues/1
+Results: the quality for the 12 reads for the 6 runs can be obtained in details from this link https://github.com/Saraelattar/fastqc/issues/2 [](https://github.com/Saraelattar/fastqc/issues/2
 ) . 
 The following plot indicates a good quality of the samples as it all lies under 30%.
 
@@ -414,3 +414,4 @@ Now will try to get back to the alignment step to index another genome
 
 ## Quality checking for the fastq files after processing and calculating GC content
 
+Details of Fastqc files at the following issue [](https://github.com/Saraelattar/fastqc/issues/1)
