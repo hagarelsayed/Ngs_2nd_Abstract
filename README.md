@@ -415,3 +415,15 @@ Now will try to get back to the alignment step to index another genome
 ## Quality checking for the fastq files after processing and calculating GC content
 
 Details of Fastqc files at the following issue [](https://github.com/Saraelattar/fastqc/issues/1)
+
+convert bam file to fastq file
+
+```
+samtools bam2fq TTT_13.bam > TTT_13.fastq
+ samtools bam2fq TTT_17.bam > TTT_17.fastq
+ samtools bam2fq TTT_21.bam > TTT_21.fastq
+ 
+samtools bam2fq UNT_12.bam > UNT_12.fastq
+samtools bam2fq UNT_20.bam > UNT_20.fastq
+ samtools bam2fq UNT_16.bam > UNT_16.fastq
+```
