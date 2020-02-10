@@ -11,7 +11,8 @@ Asthma used to be a chronic inflammatory airway disease which can be treated by 
 The analysis adopted a data set obtained from The Illumina TruSeq assay for project (PRJNA229998) under SRA (SRP033351) [3]. Short read data of Airway smooth muscle human samples were collected from the NCBI  database. There were four samples in total, these samples were classified into two conditions, each has three Runs: an untreated samples (at baseline) with Run accession number; (SRR1039512,SRR1039520,SRR1039516) and treated samples with Dexamethasone as Glucocorticoid; (SRR1039513,SRR1039517,SRR1039521). NCBI’s fastq-dump from sra-toolkit was used to download the short reads for NCBI short read archive (SRA) 
 The reads, in a single file, were paired-ends so it needs to be split for the downstream analysis
 
-The following command can download the data directly from NCBI, without prior prefetch command, split it into two reads and subset the reads according to our parameters. 
+The following command can download the data directly from NCBI, without prior prefetch command, split it into two reads and subset the reads according to our parameters. Troubleshooting downloading large dataset size is explained in detalis at the following issue 
+[Issue 1](https://github.com/hagarelsayed/Ngs_2nd_Abstract/issues/1)
 ```
 cd ~/workdir/sample_data
 fastq-dump --outdir fastq --gzip --skip-technical --readids --read-filter pass --dumpbase --split-3 -N 10000 -X 4010000 --clip SRR1039520
@@ -188,7 +189,7 @@ and  [issue 3](https://github.com/hagarelsayed/Ngs_2nd_Abstract/issues/3
 )
 An even smaller subset was retrieved form the fastq data for testing and checking the other workflow.
 
-Subset small number ; For test only;
+Subset small number ; For test only for other workflow ;
 `for file in ./*.fastq.gz ; do     echo $file ;     seqtk sample -s100 $file 500 > ${file/.fastq.gz/.fastq}; done`
 
 ## Alignment
