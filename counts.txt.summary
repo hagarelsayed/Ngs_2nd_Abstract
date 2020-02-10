@@ -1,0 +1,15 @@
+Status	Bam_org/UNT_SRR1039508_subset.bam	Bam_org/UNT_SRR1039512_subset.bam	Bam_org/UNT_SRR1039516_subset.bam	Bam_org/UNT_SRR1039520_subset.bam	Bam_org/TTT_SRR1039509_subset.bam	Bam_org/TTT_SRR1039513_subset.bam	Bam_org/TTT_SRR1039517_subset.bam	Bam_org/TTT_SRR1039521_subset.bam
+Assigned	13005	15452	16131	10571	13107	13751	21822	18588
+Unassigned_Unmapped	0	0	0	0	0	0	0	0
+Unassigned_Read_Type	0	0	0	0	0	0	0	0
+Unassigned_Singleton	0	0	0	0	0	0	0	0
+Unassigned_MappingQuality	0	0	0	0	0	0	0	0
+Unassigned_Chimera	0	0	0	0	0	0	0	0
+Unassigned_FragmentLength	0	0	0	0	0	0	0	0
+Unassigned_Duplicate	0	0	0	0	0	0	0	0
+Unassigned_MultiMapping	185	225	190	129	142	128	259	155
+Unassigned_Secondary	0	0	0	0	0	0	0	0
+Unassigned_NonSplit	0	0	0	0	0	0	0	0
+Unassigned_NoFeatures	553	670	613	523	587	528	678	622
+Unassigned_Overlapping_Length	0	0	0	0	0	0	0	0
+Unassigned_Ambiguity	539	723	700	525	563	680	935	1048
