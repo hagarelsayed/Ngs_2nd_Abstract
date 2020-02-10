@@ -65,7 +65,9 @@ cat Homo_sapiens.GRCh38.dna.chromosome.11.fa |  grep -v ">" | perl -ne 'chomp $_
 
 ## Quality control of reads was performed vi FastQC tool
 
-Results: the quality for the 12 reads for the 6 runs can be obtained in details from this link. The following plot indicates a good quality of the samples as it all lies under 30%.
+Results: the quality for the 12 reads for the 6 runs can be obtained in details from this link https://github.com/Saraelattar/fastqc/issues/1 [](https://github.com/Saraelattar/fastqc/issues/1
+) . 
+The following plot indicates a good quality of the samples as it all lies under 30%.
 
 ![per_base_quality](https://user-images.githubusercontent.com/60422836/74183300-5f1ab500-4c4d-11ea-8cdf-0b5ba62dd582.png)
 
