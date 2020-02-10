@@ -37,7 +37,8 @@ Previously the data was downloaded like this, which consumes lots of time as it 
  prefetch SRR1039509
  fastq-dump --outdir fastq --gzip --skip-technical  --readids --read-filter pass --dumpbase --split-3 --clip SRR1039509
 ```
-
+Other previous attempts for downloading the data was explained in details via [Issue1](https://github.com/hagarelsayed/Ngs_2nd_Abstract/issues/1
+)
 # Reference Genome
 
 Getting the Reference Genome in gtf Format :
@@ -164,6 +165,9 @@ The following error popped up;
 
 ` The chromosome name of "ENST00000456328.2|ENSG00000223972.5|OTTHUMG00000000961.2|OTTHUMT00000362751.1|DDX11L1-202|DDX11L1|1657|processed_transcript|" contains 125 characters, longer than the upper limit of 99 featureCounts has to stop running`
 
-
-
+Troublshooting of this error explained in detalis in [Issue 5](https://github.com/hagarelsayed/Ngs_2nd_Abstract/issues/5
+)
+and  [issue 3](https://github.com/hagarelsayed/Ngs_2nd_Abstract/issues/3
+)
+It was solved in issue 5
 
