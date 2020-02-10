@@ -308,7 +308,8 @@ The results could not be uploaded to git but found at this link
 )
 
 
-## Aligning to our original index (not a subset like in the past example) :
+## Aligning to our original Reference transcriptome 
+(not a subset like in the past example) :
 There was an attempt  towards changing the reference to our original reference that gave high alignment rate with the dataset so that the feature count will result in a count matrix containing different versatile values for deseq to work on.
 
 ```
@@ -430,3 +431,10 @@ samtools bam2fq UNT_20.bam > UNT_20.fastq
 ```
 ![image](https://user-images.githubusercontent.com/60422836/74192075-7a8dbc00-4c5d-11ea-9f38-0901d507e659.png)
 
+## Calculating GC Content
+%GC content per read =49
+![image](https://user-images.githubusercontent.com/60422836/74192720-bd9c5f00-4c5e-11ea-817e-a5d628b0052f.png)
+
+some reads have GC content much higher than average and some reads have GC content much lower than average .
+but in general the distribution of actual reads match the theortical distribution .
+this is same GC content . there is no contamination .
