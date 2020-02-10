@@ -1,0 +1,15 @@
+Status	bam/UNT_12.bam	bam/UNT_16.bam	bam/UNT_20.bam	bam/TTT_13.bam	bam/TTT_17.bam	bam/TTT_21.bam
+Assigned	40	35	24	23	25	24
+Unassigned_Unmapped	951	957	971	971	967	968
+Unassigned_Read_Type	0	0	0	0	0	0
+Unassigned_Singleton	0	0	0	0	0	0
+Unassigned_MappingQuality	0	0	0	0	0	0
+Unassigned_Chimera	0	0	0	0	0	0
+Unassigned_FragmentLength	0	0	0	0	0	0
+Unassigned_Duplicate	0	0	0	0	0	0
+Unassigned_MultiMapping	0	0	0	13	0	4
+Unassigned_Secondary	0	0	0	0	0	0
+Unassigned_NonSplit	0	0	0	0	0	0
+Unassigned_NoFeatures	9	8	5	0	2	5
+Unassigned_Overlapping_Length	0	0	0	0	0	0
+Unassigned_Ambiguity	0	0	0	2	6	1
