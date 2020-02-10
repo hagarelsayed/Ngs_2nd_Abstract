@@ -152,7 +152,6 @@ done
 ```
 Alignment rate was around  86% 
 
-
 Alignment Summary;
 ```
 4000001 reads; of these:
@@ -183,19 +182,12 @@ The following error popped up;
 
 ` The chromosome name of "ENST00000456328.2|ENSG00000223972.5|OTTHUMG00000000961.2|OTTHUMT00000362751.1|DDX11L1-202|DDX11L1|1657|processed_transcript|" contains 125 characters, longer than the upper limit of 99 featureCounts has to stop running`
 
-Troublshooting of this error explained in detalis in [Issue 5](https://github.com/hagarelsayed/Ngs_2nd_Abstract/issues/5
+Troublshooting of this error explained in details in [Issue 5](https://github.com/hagarelsayed/Ngs_2nd_Abstract/issues/5
 )
 and  [issue 3](https://github.com/hagarelsayed/Ngs_2nd_Abstract/issues/3
 )
-It was solved in issue 5
+An even smaller subset was retrieved form the fastq data for testing and checking the other workflow.
 
-## Data Subsetting to an even smaller size
-
-Preparing Environment
-```
-conda activate ngs1
-conda install seqtk
-```
 Subset small number ; For test only;
 `for file in ./*.fastq.gz ; do     echo $file ;     seqtk sample -s100 $file 500 > ${file/.fastq.gz/.fastq}; done`
 
