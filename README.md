@@ -8,11 +8,9 @@ Asthma used to be a chronic inflammatory airway disease which can be treated by 
 # Methods and Materials:
 
 ## Datasets and pre-processing: 
-The analysis adopted a data set obtained from The Illumina TruSeq assay for project (PRJNA229998) under SRA (SRP033351) [3]. The Experiment used high through-put (to be completed)
+The analysis adopted a data set obtained from The Illumina TruSeq assay for project (PRJNA229998) under SRA (SRP033351) [3]. Short read data of Airway smooth muscle human samples were collected from the NCBI  database. There were four samples in total, these samples were classified into two conditions, each has three Runs: an untreated samples (at baseline) with Run accession number; (SRR1039512,SRR1039520,SRR1039516) and treated samples with Dexamethasone as Glucocorticoid; (SRR1039513,SRR1039517,SRR1039521). NCBI’s fastq-dump from sra-toolkit was used to download the short reads for NCBI short read archive (SRA) 
+The reads, in a single file, were paired-ends so it needs to be split for the downstream analysis
 
-
-NCBI’s fastq-dump from sra-toolkit was used to download the short reads for NCBI short read archive (SRA).
-The reads, in a single file, were paired-ends so it needs to be split for the downstream analysis.
 The following command can download the data directly from NCBI, without prior prefetch command, split it into two reads and subset the reads according to our parameters. 
 ```
 cd ~/workdir/sample_data
@@ -41,8 +39,7 @@ Other previous attempts for downloading the data was explained in details via [I
 )
 # Reference Genome
 
-Getting the Reference Genome in gtf Format :
-
+There were multiple Reference genomes that have been used , Each at a time for the troubleshooting matters and to enhance the alignment rates. All the references were downloaded from NCBI Assemly, Ensembl and Gencodes websites, respectively. (Homo_sapiens.GRCh37.75.gtf.gz, Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz, Homo_sapiens.GRCh38.86.gtf.gz, Homo_sapiens.GRCh38.dna.chromosome.11.fa, gencode.v33.annotation.gtf, gencode.v33.transcripts.fa. 
 
 
 ```
@@ -55,7 +52,7 @@ wget ftp://ftp.ensembl.org/pub/release-86/gtf/homo_sapiens/Homo_sapiens.GRCh38.8
 
 ```
 
-Downloading one chromosome only to shorten the time needed for the other steps , 
+Downloading one chromosome only to shorten the time needed for the other steps;
 
 ```
 wget ftp://ftp.ensembl.org/pub/release-86/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.chromosome.11.fa.gz
@@ -65,6 +62,25 @@ wc Homo_sapiens.GRCh38.dna.chromosome.11.fa
 head -n 425000 Homo_sapiens.GRCh38.dna.chromosome.11.fa | tail
 cat Homo_sapiens.GRCh38.dna.chromosome.11.fa |  grep -v ">" | perl -ne 'chomp $_; $bases{$_}++ for split //; if (eof){print "$_ $bases{$_}\n" for sort keys %bases}'
 ```
+
+## Quality control of reads was performed vi FastQC tool
+
+Results: the quality for the 12 reads for the 6 runs can be obtained in details from this link. The following plot indicates a good quality of the samples as it all lies under 30%.
+
+![per_base_quality](https://user-images.githubusercontent.com/60422836/74183300-5f1ab500-4c4d-11ea-8cdf-0b5ba62dd582.png)
+
+The percentage of sequence remaining if deduplicated  is 66.6% which indicates that 66.6% of the reads are duplicated between 10-50 times as shown in the following plot
+![duplication_levels](https://user-images.githubusercontent.com/60422836/74184271-2a0f6200-4c4f-11ea-91f2-5a6b98ba1a53.png)
+
+The N content is almost zero across all bases which is good as te read were subsetted from the spot 10000 to skip the ambiguity of the Ns that is usually present at the begining of the fastq files. 
+![per_base_n_content](https://user-images.githubusercontent.com/60422836/74184954-65f6f700-4c50-11ea-9293-e7f72736879a.png)
+
+The Sequence content across all bases is quite good as it shows that. The proportion of each base position in the reads are with equal proportion .
+![per_base_sequence_content](https://user-images.githubusercontent.com/60422836/74185175-ca19bb00-4c50-11ea-979f-dc8d18f1e8b5.png)
+
+The GC content across the whole read length is very good as it resembles the modelled normal distribution of GC content as shown below.
+![per_sequence_gc_content](https://user-images.githubusercontent.com/60422836/74185656-bf135a80-4c51-11ea-835a-939610b8291f.png)
+
 
 
 ## Indexing by Hisat2
