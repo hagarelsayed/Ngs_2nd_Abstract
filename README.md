@@ -193,7 +193,7 @@ Subset small number ; For test only for other workflow ;
 `for file in ./*.fastq.gz ; do     echo $file ;     seqtk sample -s100 $file 500 > ${file/.fastq.gz/.fastq}; done`
 
 ## Alignment
-Choose ERCC to work on 
+As previous alignment trials was consuming too much time and computation power so It was an idea to work on the ERCC that was gotten from the course material to work on to check for the feature count error. 
 ```
 INDEX=chr22_with_ERCC92
 RUNLOG=runlog.txt
@@ -216,6 +216,7 @@ done
 
 ```
 ### Results of the first set; 
+This is one result summary , the remaining is all included in the issue 
 500 reads; of these:
   500 (100.00%) were paired; of these:
     478 (95.60%) aligned concordantly 0 times
@@ -232,37 +233,6 @@ done
         0 (0.00%) aligned >1 times
 4.90% overall alignment rate
 
-500 reads; of these:
-  500 (100.00%) were paired; of these:
-    481 (96.20%) aligned concordantly 0 times
-    19 (3.80%) aligned concordantly exactly 1 time
-    0 (0.00%) aligned concordantly >1 times
-    ----
-    481 pairs aligned concordantly 0 times; of these:
-      0 (0.00%) aligned discordantly 1 time
-    ----
-    481 pairs aligned 0 times concordantly or discordantly; of these:
-      962 mates make up the pairs; of these:
-        957 (99.48%) aligned 0 times
-        5 (0.52%) aligned exactly 1 time
-        0 (0.00%) aligned >1 times
-4.30% overall alignment rate
-
-500 reads; of these:
-  500 (100.00%) were paired; of these:
-    487 (97.40%) aligned concordantly 0 times
-    13 (2.60%) aligned concordantly exactly 1 time
-    0 (0.00%) aligned concordantly >1 times
-    ----
-    487 pairs aligned concordantly 0 times; of these:
-      0 (0.00%) aligned discordantly 1 time
-    ----
-    487 pairs aligned 0 times concordantly or discordantly; of these:
-      974 mates make up the pairs; of these:
-        971 (99.69%) aligned 0 times
-        3 (0.31%) aligned exactly 1 time
-        0 (0.00%) aligned >1 times
-2.90% overall alignment rate
 
 ![dd](https://user-images.githubusercontent.com/60422836/74152521-265fe900-4c17-11ea-9683-e6bfcb2aa090.png)
 
@@ -286,21 +256,7 @@ done
 
 
 ## Results of second set : 
-500 reads; of these:
-  500 (100.00%) were paired; of these:
-    487 (97.40%) aligned concordantly 0 times
-    12 (2.40%) aligned concordantly exactly 1 time
-    1 (0.20%) aligned concordantly >1 times
-    ----
-    487 pairs aligned concordantly 0 times; of these:
-      0 (0.00%) aligned discordantly 1 time
-    ----
-    487 pairs aligned 0 times concordantly or discordantly; of these:
-      974 mates make up the pairs; of these:
-        971 (99.69%) aligned 0 times
-        1 (0.10%) aligned exactly 1 time
-        2 (0.21%) aligned >1 times
-2.90% overall alignment rate
+
 500 reads; of these:
   500 (100.00%) were paired; of these:
     486 (97.20%) aligned concordantly 0 times
@@ -316,21 +272,7 @@ done
         5 (0.51%) aligned exactly 1 time
         0 (0.00%) aligned >1 times
 3.30% overall alignment rate
-500 reads; of these:
-  500 (100.00%) were paired; of these:
-    485 (97.00%) aligned concordantly 0 times
-    14 (2.80%) aligned concordantly exactly 1 time
-    1 (0.20%) aligned concordantly >1 times
-    ----
-    485 pairs aligned concordantly 0 times; of these:
-      0 (0.00%) aligned discordantly 1 time
-    ----
-    485 pairs aligned 0 times concordantly or discordantly; of these:
-      970 mates make up the pairs; of these:
-        968 (99.79%) aligned 0 times
-        2 (0.21%) aligned exactly 1 time
-        0 (0.00%) aligned >1 times
-3.20% overall alignment rate
+
 
 ## Quantification
 
@@ -366,35 +308,8 @@ The results could not be uploaded to git but found at this link
 )
 
 
-
-
-# Differential Expression 
-
-
-`cat counts.txt | cut -f 1,7-12 > simple_counts.txt`
-
-Simple counts produced 
-[simple_counts.txt](https://github.com/hagarelsayed/Ngs_2nd_Abstract/files/4181182/simple_counts.txt)
-
-All the schedule is Zero may be because of the low alignment rate for the small genome
-
-while trying to do the differential analysis by Deseq, 
-`cat simple_counts.txt | Rscript deseq1.r 3x3 > results_deseq1.tsv
-`
-The following error came up :
-Error in parametricDispersionFit(means, disps) :
-Parametric dispersion fit failed. Try a local fit and/or a pooled estimation.
-
-![Deseq Error](https://user-images.githubusercontent.com/60422836/74156848-d9ccdb80-4c1f-11ea-9147-c0582d770393.png)
-
-The error may be due to values on the matrix is zero which was a reult of aligning to a small portion of the reference genome 
-Now will try to get back to the alignment step to index another genome
-
-
-
-
 ## Aligning to our original index (not a subset like in the past example) :
-There was a direction towards changing the reference to our original reference that gave high alignment rate with the dataset so that the feature count will result in a count matrix containing different versatile values for deseq to work on.
+There was an attempt  towards changing the reference to our original reference that gave high alignment rate with the dataset so that the feature count will result in a count matrix containing different versatile values for deseq to work on.
 
 ```
 INDEX=gencode.v33.transcripts
@@ -424,36 +339,7 @@ Results of the Alignment score for the untreated condition
         9 (6.72%) aligned exactly 1 time
         13 (9.70%) aligned >1 times
 88.80% overall alignment rate
-500 reads; of these:
-  500 (100.00%) were paired; of these:
-    75 (15.00%) aligned concordantly 0 times
-    121 (24.20%) aligned concordantly exactly 1 time
-    304 (60.80%) aligned concordantly >1 times
-    ----
-    75 pairs aligned concordantly 0 times; of these:
-      2 (2.67%) aligned discordantly 1 time
-    ----
-    73 pairs aligned 0 times concordantly or discordantly; of these:
-      146 mates make up the pairs; of these:
-        132 (90.41%) aligned 0 times
-        4 (2.74%) aligned exactly 1 time
-        10 (6.85%) aligned >1 times
-86.80% overall alignment rate
-500 reads; of these:
-  500 (100.00%) were paired; of these:
-    86 (17.20%) aligned concordantly 0 times
-    99 (19.80%) aligned concordantly exactly 1 time
-    315 (63.00%) aligned concordantly >1 times
-    ----
-    86 pairs aligned concordantly 0 times; of these:
-      1 (1.16%) aligned discordantly 1 time
-    ----
-    85 pairs aligned 0 times concordantly or discordantly; of these:
-      170 mates make up the pairs; of these:
-        147 (86.47%) aligned 0 times
-        8 (4.71%) aligned exactly 1 time
-        15 (8.82%) aligned >1 times
-85.30% overall alignment rate
+
 
 Same step for the other group
 ```
@@ -500,3 +386,31 @@ Another Error popped up ;
 The table of the count is availabe at this link 
 
 https://github.com/hagarelsayed/Ngs_2nd_Abstract/issues/6
+
+
+
+
+# Differential Expression 
+
+
+`cat counts.txt | cut -f 1,7-12 > simple_counts.txt`
+
+Simple counts produced 
+[simple_counts.txt](https://github.com/hagarelsayed/Ngs_2nd_Abstract/files/4181182/simple_counts.txt)
+
+All the matrix is Zero may be because of the low alignment rate for the small genome
+
+while trying to do the differential analysis by Deseq, 
+`cat simple_counts.txt | Rscript deseq1.r 3x3 > results_deseq1.tsv
+`
+The following error came up :
+Error in parametricDispersionFit(means, disps) :
+Parametric dispersion fit failed. Try a local fit and/or a pooled estimation.
+
+![Deseq Error](https://user-images.githubusercontent.com/60422836/74156848-d9ccdb80-4c1f-11ea-9147-c0582d770393.png)
+
+The error may be due to values on the matrix is zero which was a reult of aligning to a small portion of the reference genome 
+Now will try to get back to the alignment step to index another genome
+
+## Quality checking for the fastq files after processing and calculating GC content
+
